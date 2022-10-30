@@ -83,6 +83,11 @@ public class SearchPageSteps implements BaseSteps {
 
     @When("user clicks {int}. result from the result list")
     public void userClicksResultFromTheResultList(int count) {
-        searchPage.clickSearchResult(count);
+        searchPage.clickSearchResult(count-1);
+    }
+
+    @Then("user should see there is no result matching with the search text")
+    public void userShouldSeeThereIsNoResultMatchingWithTheSearchText() {
+        searchPage.verifyNoneOfResultIsDisplayed();
     }
 }

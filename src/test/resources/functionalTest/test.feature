@@ -26,8 +26,9 @@ Feature: Wikipedia Search Engine Test Cases
     And the Search In bar should be present
     And the Search Result title should be present
     And the Wikipedia Logo should be displayed
-    When user writes "Car" to the search bar
+    When user writes "asdfghjlsajlkfajlgşasgş" to the search bar
     And user clicks the Search button
+    Then user should see there is no result matching with the search text
 
 
 

@@ -28,7 +28,9 @@ public class SearchPage extends BasePage {
     @FindBy(className = "mw-search-exists")
     WebElement searchInfo;
 
-    @FindBy(css = ".searchResultImage-text")
+    @FindBy(className = "mw-search-nonefound")
+    WebElement noneFoundSearchInfo;
+    @FindBy(xpath = "//a[@data-serp-pos and @href]")
     List<WebElement> searchResults;
 
     @FindBy(css = ".mw-pager-navigation-bar")
@@ -97,9 +99,14 @@ public class SearchPage extends BasePage {
 
     public void clickSearchResult(int count) {
         waitForLoad();
-        waitUntilElementIsDisplayed(searchResults.get(count - 1));
-        scrollInTheMiddleOfElement(searchResults.get(count - 1));
-        forceClick(searchResults.get(count - 1));
+        waitUntilElementIsDisplayed(searchResults.get(count));
+        scrollInTheMiddleOfElement(searchResults.get(count));
+        waitUntilClickableAndClick(searchResults.get(count));
+    }
 
+    public void verifyNoneOfResultIsDisplayed() {
+        waitUntilElementIsDisplayed(noneFoundSearchInfo);
+        String expectedText = "There were no results matching the query.";
+        Assert.assertEquals(noneFoundSearchInfo.getText(), expectedText);
     }
 }

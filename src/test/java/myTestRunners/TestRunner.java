@@ -6,7 +6,7 @@ import io.cucumber.testng.CucumberOptions;
 @CucumberOptions(
         features = "src/test/resources/functionalTest",
         glue= {"myStepDefinitions" , "myHooks"},
-        tags = "@chrome",
+        tags = "@chrome or @firefox",
         plugin = {
                 "io.qameta.allure.cucumber6jvm.AllureCucumber6Jvm",
                 "timeline:test-output-thread/",
