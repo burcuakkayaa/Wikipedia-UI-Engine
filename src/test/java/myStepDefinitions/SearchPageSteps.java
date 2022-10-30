@@ -75,4 +75,14 @@ public class SearchPageSteps implements BaseSteps {
        String actualUrl = driver.getCurrentUrl();
        Assert.assertTrue(actualUrl.contains("search=" + search));
     }
+
+    @When("user clicks the next page from the page navigation bar")
+    public void userClicksTheNextPageFromThePageNavigationBar() {
+        searchPage.clickNextPage();
+    }
+
+    @When("user clicks {int}. result from the result list")
+    public void userClicksResultFromTheResultList(int count) {
+        searchPage.clickSearchResult(count);
+    }
 }
