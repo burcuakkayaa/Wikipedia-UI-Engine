@@ -73,6 +73,7 @@ public class BasePage extends PageFactory {
             takeScreenshot();
         }
     }
+
     public void waitUntilVisible(WebElement element) {
         /*
          * Wait element is visible.
@@ -160,6 +161,7 @@ public class BasePage extends PageFactory {
             System.out.println("ScreenShot fail." + e.getMessage());
         }
     }
+
     public synchronized boolean waitUntilUrlContains(String expectedValue) {
 
         Wait<WebDriver> wait = new FluentWait<>(driver).withTimeout(Duration.ofSeconds(timeOut))

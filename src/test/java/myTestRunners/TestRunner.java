@@ -7,7 +7,7 @@ import org.testng.annotations.*;
 
 @CucumberOptions(
         features = "src/test/resources/functionalTest",
-        glue= {"myStepDefinitions" , "myHooks"},
+        glue = {"myStepDefinitions", "myHooks"},
         tags = "@chrome or @firefox",
         plugin = {"io.qameta.allure.cucumber6jvm.AllureCucumber6Jvm",
                 "timeline:test-output-thread/",
@@ -23,7 +23,8 @@ public class TestRunner implements IRetryAnalyzer {
 
     @Override
     public boolean retry(ITestResult iTestResult) {
-        if (!iTestResult.isSuccess()) {  ;
+        if (!iTestResult.isSuccess()) {
+            ;
             if (count < maxTry) {
                 count++;
                 iTestResult.setStatus(ITestResult.FAILURE);
@@ -44,7 +45,7 @@ public class TestRunner implements IRetryAnalyzer {
     }
 
     @Test(groups = "cucumber", description = "Runs Cucumber Scenarios",
-            dataProvider = "scenarios",retryAnalyzer = TestRunner.class)
+            dataProvider = "scenarios", retryAnalyzer = TestRunner.class)
     public void scenario(PickleWrapper pickleEvent, FeatureWrapper cucumberFeature) {
         testNGCucumberRunner.runScenario(pickleEvent.getPickle());
     }

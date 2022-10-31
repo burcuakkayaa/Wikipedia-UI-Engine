@@ -10,6 +10,7 @@ import static utils.Constants.FIREFOX_OPTIONS;
 public class CreateFirefoxDriver {
 
     WebDriver driver;
+
     public WebDriver createFirefoxDriver() {
 
         WebDriverManager.firefoxdriver().setup();

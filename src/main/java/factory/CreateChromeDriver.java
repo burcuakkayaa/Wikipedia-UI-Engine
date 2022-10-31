@@ -9,11 +9,12 @@ import static utils.Constants.CHROME_OPTIONS;
 
 public class CreateChromeDriver {
 
-   WebDriver driver;
+    WebDriver driver;
+
     public WebDriver createChromeDriver() {
 
         WebDriverManager.chromedriver().setup();
-         driver = new ChromeDriver(getOptions());
+        driver = new ChromeDriver(getOptions());
         return driver;
     }
 

@@ -12,13 +12,13 @@ public class SearchPageSteps extends BaseSteps {
 
     @Given("user is on the Search Page")
     public void user_is_on_the_search_page() {
-         searchPage.getSearchPage();
+        searchPage.getSearchPage();
     }
 
     @When("user writes {string} to the search bar")
     public void user_writes_to_the_search_bar(String search) {
-       this.search = search;
-       searchPage.writeTheSearchValue(search);
+        this.search = search;
+        searchPage.writeTheSearchValue(search);
     }
 
 
@@ -72,8 +72,8 @@ public class SearchPageSteps extends BaseSteps {
 
     @And("The url should contain the search value")
     public void theUrlShouldContainTheSearchValue() {
-       String actualUrl = baseHook.driver.getCurrentUrl();
-       Assert.assertTrue(actualUrl.contains("search=" + search));
+        String actualUrl = baseHook.driver.getCurrentUrl();
+        Assert.assertTrue(actualUrl.contains("search=" + search));
     }
 
     @When("user clicks the next page from the page navigation bar")
@@ -83,7 +83,7 @@ public class SearchPageSteps extends BaseSteps {
 
     @When("user clicks {int}. result from the result list")
     public void userClicksResultFromTheResultList(int count) {
-        searchPage.clickSearchResult(count-1);
+        searchPage.clickSearchResult(count - 1);
     }
 
     @Then("user should see there is no result matching with the search text")
