@@ -1,6 +1,7 @@
 package factory;
 
 import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
 
 import java.time.Duration;
 
@@ -15,13 +16,16 @@ public class DriverFactory {
         /*
          * The method returns Webdriver
          */
-
-        if (browser.equalsIgnoreCase("firefox")) {
-            CreateFirefoxDriver firefox = new CreateFirefoxDriver();
-            tlDriver = firefox.createFirefoxDriver();
-        } else {
-            CreateChromeDriver chrome = new CreateChromeDriver();
-            tlDriver = chrome.createChromeDriver();
+        try {
+            if (browser.equalsIgnoreCase("firefox")) {
+                CreateFirefoxDriver firefox = new CreateFirefoxDriver();
+                tlDriver = firefox.createFirefoxDriver();
+            } else {
+                CreateChromeDriver chrome = new CreateChromeDriver();
+                tlDriver = chrome.createChromeDriver();
+            }
+        }catch (Exception e) {
+            Assert.fail("The selected browser can not started, please make sure if the browser exists.");
         }
 
         WebDriver driver = tlDriver.get();
