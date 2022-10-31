@@ -28,8 +28,6 @@ public class CreateFirefoxDriver extends DriverFactory {
         firefoxOptions.addArguments(FIREFOX_OPTIONS);
         myProfile.setAcceptUntrustedCertificates(true);
         myProfile.setAssumeUntrustedCertificateIssuer(false);
-
-
         return firefoxOptions;
     }
 }

@@ -47,31 +47,6 @@ public class BasePage extends PageFactory {
         }
     }
 
-    public void forceClick(WebElement element) {
-        /*
-         * Click the element with js executor
-         */
-
-        try {
-            JavascriptExecutor js = (JavascriptExecutor) driver;
-            js.executeScript("var evt = document.createEvent('MouseEvents');"
-                    + "evt.initMouseEvent('click',true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0,null);"
-                    + "arguments[0].dispatchEvent(evt);", element);
-        } catch (Exception e) {
-            takeScreenshot();
-        }
-
-    }
-
-    public void actionClick(WebElement element) {
-        /*
-         * Click the element with action.
-         */
-
-        Actions actions = new Actions(driver);
-        actions.moveToElement(element).click().perform();
-    }
-
     public void findAndScrollElement(WebElement element, int scrollAmount) {
         /*
          * Scroll to the element.
@@ -99,27 +74,6 @@ public class BasePage extends PageFactory {
             takeScreenshot();
         }
     }
-
-    public synchronized boolean waitUntilUrlContains(String expectedValue) {
-        /*
-         * Verify that expected url is on.
-         */
-
-        Wait<WebDriver> wait = new FluentWait<>(driver).withTimeout(Duration.ofSeconds(timeOut))
-                .pollingEvery(Duration.ofMillis(1000)).ignoring(StaleElementReferenceException.class)
-                .ignoring(NoSuchElementException.class);
-        boolean urlExists = wait.until(ExpectedConditions.urlContains(expectedValue));
-        if (urlExists) {
-
-
-            System.out.println("Waited until for URL and contains expected value: " + expectedValue);
-
-        }
-
-        return true;
-    }
-
-
     public void waitUntilVisible(WebElement element) {
         /*
          * Wait element is visible.
@@ -167,13 +121,6 @@ public class BasePage extends PageFactory {
 
     }
 
-    public void moveToActiveElement() {
-        /*
-         * Move to active element on the page.
-         */
-        driver.switchTo().activeElement();
-    }
-
     public void waitForJQueryLoad() {
         try {
             ExpectedCondition<Boolean> jQueryLoad = driver -> ((Long) ((JavascriptExecutor) this.driver)
@@ -186,30 +133,11 @@ public class BasePage extends PageFactory {
         }
     }
 
-    public void waitUntilJSReady() {
-        try {
-            ExpectedCondition<Boolean> jsLoad = driver -> ((JavascriptExecutor) this.driver)
-                    .executeScript("return document.readyState").toString().equals("complete");
-            boolean jsReady = js.executeScript("return document.readyState").toString().equals("complete");
-            if (!jsReady) {
-                jsWait.until(jsLoad);
-            }
-        } catch (WebDriverException ignored) {
-        }
-    }
-
     public void scrollInTheMiddleOfElement(WebElement element) {
 
         JavascriptExecutor j = (JavascriptExecutor) driver;
         j.executeScript("arguments[0].scrollIntoView({block: 'center', inline: 'nearest'})", element);
     }
-
-
-    public void implicitWait(long seconds) {
-
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(seconds));
-    }
-
 
     private String getCurrentTime() {
         /*
