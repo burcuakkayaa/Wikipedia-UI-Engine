@@ -3,7 +3,7 @@ package utils;
 public class Constants {
 
     public static final String BASE_URL = "https://en.wikipedia.org/w/index.php?search";
-    public static final String IMPLICIT_WAIT_DURATION = "5";
+    public static final String IMPLICIT_WAIT_DURATION = "20";
     public static final String PAGE_LOAD_TIMEOUT = "180000";
     public static final String[] CHROME_OPTIONS = {
             "--disable-cache"

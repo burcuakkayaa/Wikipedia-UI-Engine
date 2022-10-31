@@ -2,7 +2,6 @@ package pages;
 
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.*;
@@ -161,5 +160,19 @@ public class BasePage extends PageFactory {
             System.out.println("ScreenShot fail." + e.getMessage());
         }
     }
+    public synchronized boolean waitUntilUrlContains(String expectedValue) {
 
+        Wait<WebDriver> wait = new FluentWait<>(driver).withTimeout(Duration.ofSeconds(timeOut))
+                .pollingEvery(Duration.ofMillis(1000)).ignoring(StaleElementReferenceException.class)
+                .ignoring(NoSuchElementException.class);
+        boolean urlExists = wait.until(ExpectedConditions.urlContains(expectedValue));
+        if (urlExists) {
+
+
+            System.out.println("Waited until for URL and contains expected value: " + expectedValue);
+
+        }
+
+        return true;
+    }
 }

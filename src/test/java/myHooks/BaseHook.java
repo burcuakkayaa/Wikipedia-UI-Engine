@@ -1,6 +1,7 @@
 package myHooks;
 
-import factory.DriverFactory;
+import factory.CreateChromeDriver;
+import factory.CreateFirefoxDriver;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
@@ -8,27 +9,26 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 
-public class BaseHooks {
+public class BaseHook {
 
-    protected static DriverFactory factory;
-    public static WebDriver driver;
-
-    public BaseHooks() {
-        factory = new DriverFactory();
-    }
+    public static WebDriver driver = null;
 
     @Before("@chrome")
     public void launchBrowserAsChrome() {
-        driver = factory.getDriverManager("chrome");
+        System.out.println("Chrome STARTED");
+        CreateChromeDriver chrome = new CreateChromeDriver();
+        driver = chrome.createChromeDriver();
 
     }
 
     @Before("@firefox")
     public void launchBrowserAsFirefox() {
-        driver = factory.getDriverManager("firefox");
+        System.out.println("Firefox STARTED");
+        CreateFirefoxDriver firefox = new CreateFirefoxDriver();
+        driver = firefox.createFirefoxDriver();
     }
 
-    @After(order = 1)
+    @After()
     public void afterScenario(Scenario scenario) {
 
         if (scenario.isFailed()) {
@@ -41,11 +41,7 @@ public class BaseHooks {
 
         }
 
-    }
-
-
-    @After(order = 0)
-    public void AfterSteps() {
         driver.quit();
+
     }
 }

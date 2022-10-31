@@ -1,13 +1,16 @@
 package pages;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
 import utils.Constants;
 
+import java.time.Duration;
 import java.util.List;
+
+import static utils.Constants.IMPLICIT_WAIT_DURATION;
+import static utils.Constants.PAGE_LOAD_TIMEOUT;
 
 public class SearchPage extends BasePage {
 
@@ -44,9 +47,14 @@ public class SearchPage extends BasePage {
     }
 
     public void getSearchPage() {
-        waitForLoad();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(Long.parseLong(IMPLICIT_WAIT_DURATION)));
+        driver.manage().timeouts().pageLoadTimeout(Duration.ofMillis(Long.parseLong(PAGE_LOAD_TIMEOUT)));
         driver.get(Constants.BASE_URL);
+        driver.manage().deleteAllCookies();
+        driver.manage().window().maximize();
+        waitForLoad();
         waitForJQueryLoad();
+        waitUntilUrlContains("search");
     }
 
     public void writeTheSearchValue(String search) {

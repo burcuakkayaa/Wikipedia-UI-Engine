@@ -7,15 +7,14 @@ import org.openqa.selenium.chrome.ChromeOptions;
 
 import static utils.Constants.CHROME_OPTIONS;
 
-public class CreateChromeDriver extends DriverFactory {
+public class CreateChromeDriver {
 
-
-    public ThreadLocal<WebDriver> createChromeDriver() {
+   WebDriver driver;
+    public WebDriver createChromeDriver() {
 
         WebDriverManager.chromedriver().setup();
-        tlDriver.set(new ChromeDriver(getOptions()));
-
-        return tlDriver;
+         driver = new ChromeDriver(getOptions());
+        return driver;
     }
 
     private ChromeOptions getOptions() {

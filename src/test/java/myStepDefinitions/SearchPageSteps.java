@@ -6,7 +6,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
 
-public class SearchPageSteps implements BaseSteps {
+public class SearchPageSteps extends BaseSteps {
 
     private String search;
 
@@ -72,7 +72,7 @@ public class SearchPageSteps implements BaseSteps {
 
     @And("The url should contain the search value")
     public void theUrlShouldContainTheSearchValue() {
-       String actualUrl = driver.getCurrentUrl();
+       String actualUrl = baseHook.driver.getCurrentUrl();
        Assert.assertTrue(actualUrl.contains("search=" + search));
     }
 
